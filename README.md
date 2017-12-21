@@ -13,10 +13,14 @@ A small college project made by Unity Game engine that explores the various Cera
 # TO-DO
 ==================
 
--Fix some bugs with the Octahedral Crystal structure with the Pivot Point and expansion
--Add a better UI
+-Fix some bugs with the Octahedral Crystal structure with the Pivot Point and expansion 
+
+-Add a better UI 
+
 -Adding some Graphical aids in the main scene
+
 -Adding a check for corner cases where the Ratio between ions size is not Possible in a real life application
+
 -Separating +ve/-ve databases
 
 
