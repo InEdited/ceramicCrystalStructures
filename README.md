@@ -4,6 +4,9 @@ A small college project made by Unity Game engine that explores the various Cera
 -Currently can only take one Anion&Cation and display their crystal structure in a rotatable object to examine it, the Anion/Cation size is also interactive ( it changes size according to the ion's radius)
 -Can expand the structure to be examined further
 
+-A screen shot from the Project in Unity
+![alt text](https://raw.githubusercontent.com/InEdited/ceramicCrystalStructures/master/projectScreenshot.png)
+
 
 
 ==================
