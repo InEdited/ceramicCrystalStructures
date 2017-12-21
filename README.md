@@ -7,7 +7,7 @@ A small college project made by Unity Game engine that explores the various Cera
 
 
 ==================
-TO-DO
+# TO-DO
 ==================
 -Fix some bugs with the Octahedral Crystal structure with the Pivot Point and expansion
 -Add a better UI
