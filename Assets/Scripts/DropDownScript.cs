@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,17 +17,20 @@ public class DropDownScript : MonoBehaviour {
     public Camera cameraCubic;
     public double anion,cation;
 
-    private readonly Dictionary<string, double> IonsDatabase = new Dictionary<string, double>()
+	private readonly Dictionary <string,double> CationDatabase = new Dictionary<string,double> (){
+		{"Choose an Anion",0},
+		{"O2-",126},
+		{"S2-",170},
+		{"Se2-",184},
+		{"Te2-",207},
+		{"F-",119},
+		{"Cl-",167},
+		{"Br-",182},
+		{"I-",206},
+	};
+	private Dictionary<string, double> AnionDatabase = new Dictionary<string, double>()
 {
-     {"Choose an Ion",0},
-     {"O2-",126},
-     {"S2-",170},
-     {"Se2-",184},
-     {"Te2-",207},
-     {"F-",119},
-     {"Cl-",167},
-     {"Br-",182},
-     {"I-",206},
+		{"Choose a Cation", 0},
      {"Li+",90},
      {"Na+",116},
      {"K+",152},
@@ -134,8 +137,8 @@ public class DropDownScript : MonoBehaviour {
     }
     public void DropdownCationValueChanged(int newPosition)
     {
-        double ion1 = IonsDatabase.Values.ElementAt((int)newPosition);
-        cation = ion1;
+		double ion1 = CationDatabase.Values.ElementAt((int)newPosition);
+		cation = ion1;
         //double ion2 = IonsDatabase.Values.ElementAt((int)newPosition);
         //print(ion1);
         foreach (GameObject cation in cations)
@@ -144,23 +147,23 @@ public class DropDownScript : MonoBehaviour {
             mi.y = (float) ion1/200;
             mi.x = (float) ion1/200;
             mi.z = (float) ion1/200;
-            cation.transform.localScale = mi;
+			cation.transform.localScale = mi;
             //cation.transform.lossyScale
         }
 }
     public void DropdownAnionValueChanged(int newPosition)
     {
         //double ion1 = IonsDatabase.Values.ElementAt((int)newPosition); 
-        double ion2 = IonsDatabase.Values.ElementAt((int)newPosition);
-        anion = ion2;
+		double ion2 = AnionDatabase.Values.ElementAt((int)newPosition); 
+		anion = ion2;
         //print(ion2);
-        foreach (GameObject anion in anions)
+		foreach (GameObject anion in anions)
         {
             Vector3 mi = transform.localScale;
             mi.y = (float)ion2 / 200;
             mi.x = (float)ion2 / 200;
             mi.z = (float)ion2 / 200;
-            anion.transform.localScale = mi;
+			anion.transform.localScale = mi;
             //cation.transform.lossyScale
         }
 
@@ -171,14 +174,14 @@ public class DropDownScript : MonoBehaviour {
         if (cationsDropdown != null)
         {
             cationsDropdown.ClearOptions();
-            cationsDropdown.AddOptions(IonsDatabase.Keys.ToList());
+			cationsDropdown.AddOptions(CationDatabase.Keys.ToList());
 
             cationsDropdown.onValueChanged.AddListener(DropdownCationValueChanged);
         }
         if (anionsDropdown != null)
         {
             anionsDropdown.ClearOptions();
-            anionsDropdown.AddOptions(IonsDatabase.Keys.ToList());
+			anionsDropdown.AddOptions(AnionDatabase.Keys.ToList());
 
             anionsDropdown.onValueChanged.AddListener(DropdownAnionValueChanged);
         }
