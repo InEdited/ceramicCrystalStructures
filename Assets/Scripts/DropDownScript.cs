@@ -15,19 +15,23 @@ public class DropDownScript : MonoBehaviour {
     public Camera cameraTetrahedral;
     public Camera cameraOctahedral;
     public Camera cameraCubic;
+	public Camera cameraLinear;
     public double anion,cation;
 
-    private readonly Dictionary<string, double> IonsDatabase = new Dictionary<string, double>()
+	private readonly Dictionary <string,double> CationDatabase = new Dictionary<string,double> (){
+		{"Choose an Anion",0},
+		{"O2-",126},
+		{"S2-",170},
+		{"Se2-",184},
+		{"Te2-",207},
+		{"F-",119},
+		{"Cl-",167},
+		{"Br-",182},
+		{"I-",206},
+	};
+	private Dictionary<string, double> AnionDatabase = new Dictionary<string, double>()
 {
-     {"Choose an Ion",0},
-     {"O2-",126},
-     {"S2-",170},
-     {"Se2-",184},
-     {"Te2-",207},
-     {"F-",119},
-     {"Cl-",167},
-     {"Br-",182},
-     {"I-",206},
+		{"Choose a Cation", 0},
      {"Li+",90},
      {"Na+",116},
      {"K+",152},
@@ -134,8 +138,8 @@ public class DropDownScript : MonoBehaviour {
     }
     public void DropdownCationValueChanged(int newPosition)
     {
-        double ion1 = IonsDatabase.Values.ElementAt((int)newPosition);
-        cation = ion1;
+		double ion1 = CationDatabase.Values.ElementAt((int)newPosition);
+		cation = ion1;
         //double ion2 = IonsDatabase.Values.ElementAt((int)newPosition);
         //print(ion1);
         foreach (GameObject cation in cations)
@@ -144,23 +148,23 @@ public class DropDownScript : MonoBehaviour {
             mi.y = (float) ion1/200;
             mi.x = (float) ion1/200;
             mi.z = (float) ion1/200;
-            cation.transform.localScale = mi;
+			cation.transform.localScale = mi;
             //cation.transform.lossyScale
         }
 }
     public void DropdownAnionValueChanged(int newPosition)
     {
         //double ion1 = IonsDatabase.Values.ElementAt((int)newPosition); 
-        double ion2 = IonsDatabase.Values.ElementAt((int)newPosition);
-        anion = ion2;
+		double ion2 = AnionDatabase.Values.ElementAt((int)newPosition); 
+		anion = ion2;
         //print(ion2);
-        foreach (GameObject anion in anions)
+		foreach (GameObject anion in anions)
         {
             Vector3 mi = transform.localScale;
             mi.y = (float)ion2 / 200;
             mi.x = (float)ion2 / 200;
             mi.z = (float)ion2 / 200;
-            anion.transform.localScale = mi;
+			anion.transform.localScale = mi;
             //cation.transform.lossyScale
         }
 
@@ -171,14 +175,14 @@ public class DropDownScript : MonoBehaviour {
         if (cationsDropdown != null)
         {
             cationsDropdown.ClearOptions();
-            cationsDropdown.AddOptions(IonsDatabase.Keys.ToList());
+			cationsDropdown.AddOptions(CationDatabase.Keys.ToList());
 
             cationsDropdown.onValueChanged.AddListener(DropdownCationValueChanged);
         }
         if (anionsDropdown != null)
         {
             anionsDropdown.ClearOptions();
-            anionsDropdown.AddOptions(IonsDatabase.Keys.ToList());
+			anionsDropdown.AddOptions(AnionDatabase.Keys.ToList());
 
             anionsDropdown.onValueChanged.AddListener(DropdownAnionValueChanged);
         }
@@ -190,29 +194,41 @@ public class DropDownScript : MonoBehaviour {
         print(cation);
         print(anion);
         print(ratio);
-        if (ratio >= 0.15 && ratio <= 0.225)
+		if (ratio<=0.15)
+		{
+			cameraLinear.depth = 0;
+			cameraTriagonal.depth = -1;
+            cameraOctahedral.depth = -1;
+            cameraTetrahedral.depth = -1;
+            cameraCubic.depth = -1;
+		}
+        else if (ratio >= 0.15 && ratio <= 0.225)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = 0;
             cameraOctahedral.depth = -1;
             cameraTetrahedral.depth = -1;
             cameraCubic.depth = -1;
         } //triagonal
-        if (ratio >= 0.2255 && ratio <= 0.414)
+        else if (ratio >= 0.2255 && ratio <= 0.414)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = -1;
             cameraOctahedral.depth = -1;
             cameraTetrahedral.depth = 0;
             cameraCubic.depth = -1;
         } //tetrahedral
-        if (ratio >= 0.414 && ratio <= 0.73)
+        else if (ratio >= 0.414 && ratio <= 0.73)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = -1;
             cameraOctahedral.depth = 0;
             cameraTetrahedral.depth = -1;
             cameraCubic.depth = -1;
         } //octahedral
-        if (ratio >= 0.73 && ratio <= 1)
+        else if (ratio >= 0.73 && ratio <= 1)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = -1;
             cameraOctahedral.depth = -1;
             cameraTetrahedral.depth = -1;

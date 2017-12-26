@@ -1,0 +1,12 @@
+Update:		 Mo7sen.1
+
+	-Added Camera motion effect when expanding Crystal Structures
+	
+	
+	
+	-Fixed Bugs:
+		*Collider not expanding with Cubic Crystal Structure
+		*Collider not expanding with unreleased Linear Crystal Structure
+		
+		
+		
