@@ -15,6 +15,7 @@ public class DropDownScript : MonoBehaviour {
     public Camera cameraTetrahedral;
     public Camera cameraOctahedral;
     public Camera cameraCubic;
+	public Camera cameraLinear;
     public double anion,cation;
 
 	private readonly Dictionary <string,double> CationDatabase = new Dictionary<string,double> (){
@@ -193,29 +194,41 @@ public class DropDownScript : MonoBehaviour {
         print(cation);
         print(anion);
         print(ratio);
-        if (ratio >= 0.15 && ratio <= 0.225)
+		if (ratio<=0.15)
+		{
+			cameraLinear.depth = 0;
+			cameraTriagonal.depth = -1;
+            cameraOctahedral.depth = -1;
+            cameraTetrahedral.depth = -1;
+            cameraCubic.depth = -1;
+		}
+        else if (ratio >= 0.15 && ratio <= 0.225)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = 0;
             cameraOctahedral.depth = -1;
             cameraTetrahedral.depth = -1;
             cameraCubic.depth = -1;
         } //triagonal
-        if (ratio >= 0.2255 && ratio <= 0.414)
+        else if (ratio >= 0.2255 && ratio <= 0.414)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = -1;
             cameraOctahedral.depth = -1;
             cameraTetrahedral.depth = 0;
             cameraCubic.depth = -1;
         } //tetrahedral
-        if (ratio >= 0.414 && ratio <= 0.73)
+        else if (ratio >= 0.414 && ratio <= 0.73)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = -1;
             cameraOctahedral.depth = 0;
             cameraTetrahedral.depth = -1;
             cameraCubic.depth = -1;
         } //octahedral
-        if (ratio >= 0.73 && ratio <= 1)
+        else if (ratio >= 0.73 && ratio <= 1)
         {
+			cameraLinear.depth = -1;
             cameraTriagonal.depth = -1;
             cameraOctahedral.depth = -1;
             cameraTetrahedral.depth = -1;

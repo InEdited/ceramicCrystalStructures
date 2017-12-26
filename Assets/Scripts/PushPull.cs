@@ -14,13 +14,33 @@ public class PushPull : MonoBehaviour {
 	public GameObject gobj3;
 	public GameObject gobj4;
 	public static int state = 0;
-    public Camera cameraTriagonal, cameraTetragonal, cameraOctahedral, cameraCubic;
-    public float fieldOfView;
+    public Camera cameraTriagonal, cameraTetragonal, cameraOctahedral, cameraCubic, cameraLinear;
+    public float fieldOfViewMax;
+	public static float fieldOfViewMin = 60;
+	float fov = fieldOfViewMin;
     private bool changeCamera;
     private float changeVelocity;
 
     private void Update()
     {
+		if(state == 0 && fov > fieldOfViewMin)
+		{
+			fov--;
+			cameraTriagonal.fieldOfView = fov;
+			cameraTetragonal.fieldOfView = fov;
+			cameraOctahedral.fieldOfView = fov;
+			cameraCubic.fieldOfView = fov;
+			cameraLinear.fieldOfView = fov;
+		}
+		else if(state == 1 && fov< fieldOfViewMax)
+		{
+			fov++;
+			cameraTriagonal.fieldOfView = fov;
+			cameraTetragonal.fieldOfView = fov;
+			cameraOctahedral.fieldOfView = fov;
+			cameraCubic.fieldOfView = fov;
+			cameraLinear.fieldOfView = fov;
+		}
         /*if (changeCamera)
         {
             cameraTriagonal.fieldOfView = Mathf.SmoothDamp(60,fieldOfView,ref changeVelocity,1);
@@ -53,10 +73,10 @@ public class PushPull : MonoBehaviour {
 			anim2.Play("Push");
 			anim3.Play("Push");
 			anim4.Play("Push");
-            cameraTriagonal.fieldOfView = fieldOfView;
+            /*cameraTriagonal.fieldOfView = fieldOfView;
             cameraCubic.fieldOfView = fieldOfView;
             cameraOctahedral.fieldOfView = fieldOfView;
-            cameraTetragonal.fieldOfView = fieldOfView;
+            cameraTetragonal.fieldOfView = fieldOfView;*/
         }
 		else
 		{
@@ -66,11 +86,11 @@ public class PushPull : MonoBehaviour {
 			anim2.Play("Pull");
 			anim3.Play("Pull");
 			anim4.Play("Pull");
-
+/*
             cameraTriagonal.fieldOfView = 60;
             cameraCubic.fieldOfView = 60;
             cameraOctahedral.fieldOfView = 60;
             cameraTetragonal.fieldOfView = 60;
-        }
+    */    }
     }
 }
